@@ -1,6 +1,8 @@
 version: '3'
 
 services:
+  db:
+    image: postgres
   web:
     build: .
     command: gunicorn myproject.wsgi:application --bind 0.0.0.0:8000
@@ -8,6 +10,8 @@ services:
       - .:/app
     ports:
       - "8000:8000"
+    depends_on:
+      - db
   nginx:
     image: nginx:1.13
     ports:
