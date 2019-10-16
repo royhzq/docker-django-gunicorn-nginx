@@ -8,3 +8,13 @@ services:
       - .:/app
     ports:
       - "8000:8000"
+  nginx:
+    image: nginx:1.13
+    ports:
+      - 80:80
+    volumes:
+      - ./config/nginx/conf.d:/etc/nginx/conf.d
+      - ./static:/static
+    restart: always
+    depends_on:
+      - web
